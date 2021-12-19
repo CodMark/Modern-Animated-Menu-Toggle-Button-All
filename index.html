@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .container {
+        width: 32rem;
+        height: auto;
+    }
+
+    .row {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .block {
+        height: 60px;
+        width: 60px;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 10px;
+        transition: all 1s ease;
+        background: linear-gradient(134deg, #ff006a, #ff8d00);
+        box-shadow: 6px 13px 20px #ff2d008a;
+    }
+
+    .cta {
+        height: 50px;
+        width: 50px;
+        cursor: pointer;
+    }
+
+    .toggle-btn {
+        height: 4px;
+        border-radius: 6px;
+        width: 25px;
+        background-color: #fff;
+        position: relative;
+        top: 50%;
+        left: 0;
+        margin: auto;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .toggle-btn:before {
+        content: "";
+        height: 4px;
+        border-radius: 6px;
+        width: 25px;
+        box-shadow: 0 -10px 0 0 #fff;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .toggle-btn:after {
+        content: "";
+        height: 4px;
+        border-radius: 6px;
+        width: 25px;
+        box-shadow: 0 10px 0 0 #fff;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .type17:before {
+        width: 12px;
+    }
+
+    .type17:after {
+        width: 12px;
+        box-shadow: 13px 10px 0 0 #fff;
+    }
+
+    .type18:before {
+        right: 0;
+        width: 6px;
+    }
+
+    .type18:after {
+        width: 12px;
+        box-shadow: 13px 10px 0 0 #fff;
+    }
+
+    .active .toggle-btn {
+        background-color: transparent;
+        transition: all 0.2s ease-in-out;
+    }
+
+    .active .toggle-btn:before {
+        top: 0;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .active .toggle-btn:after {
+        top: 0;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .active .type1:before {
+        left: 6px;
+        transform: translateY(6px) rotate(-45deg);
+    }
+
+    .active .type1:after {
+        top: 0;
+        left: 6px;
+        transform: translateY(-8px) rotate(45deg);
+    }
+
+    .active .type2:before {
+        left: 5px;
+        transform: translateY(0) rotate(-40deg);
+    }
+
+    .active .type2:after {
+        left: 5px;
+        transform: translateY(0) rotate(40deg);
+    }
+
+    .active .type3:before {
+        left: -5px;
+        transform: translateY(0) rotate(40deg);
+    }
+
+    .active .type3:after {
+        left: -5px;
+        transform: translateY(0) rotate(-40deg);
+    }
+
+    .active .type4 {
+        background-color: #fff;
+    }
+
+    .active .type4:before {
+        box-shadow: 0 0 0 0 #fff;
+    }
+
+    .active .type4:after {
+        box-shadow: 0 0 0 0 #fff;
+    }
+
+    .active .type5 {
+        background-color: #fff;
+    }
+
+    .active .type5:before {
+        left: 2px;
+        transform: translateY(0) rotate(-40deg);
+    }
+
+    .active .type5:after {
+        left: 2px;
+        transform: translateY(0) rotate(40deg);
+    }
+
+    .active .type6 {
+        background-color: #fff;
+    }
+
+    .active .type6:before {
+        left: -2px;
+        transform: translateY(0) rotate(40deg);
+    }
+
+    .active .type6:after {
+        left: -2px;
+        transform: translateY(0) rotate(-40deg);
+    }
+
+    .active .type7 {
+        background-color: #fff;
+    }
+
+    .active .type7:before {
+        box-shadow: 0 0 0 0 #fff;
+    }
+
+    .active .type7:after {
+        left: -10px;
+        box-shadow: 0 -10px 0 0 #fff;
+        transform: translateY(0) rotate(90deg);
+    }
+
+    .active .type8 {
+        background-color: #fff;
+    }
+
+    .active .type8:before {
+        left: -10px;
+        box-shadow: 0 -10px 0 0 #fff;
+        transform: translateY(0) rotate(90deg);
+    }
+
+    .active .type8:after {
+        box-shadow: 0 0 0 0 #fff;
+    }
+
+    .active .type9 {
+        background-color: #fff;
+        transform: rotate(45deg);
+    }
+
+    .active .type9:before {
+        left: -10px;
+        box-shadow: 0 -10px 0 0 #fff;
+        transform: translateY(0) rotate(90deg);
+    }
+
+    .active .type9:after {
+        box-shadow: 0 0 0 0 #fff;
+    }
+
+    .active .type10 {
+        background-color: #fff;
+        transform: rotate(45deg);
+    }
+
+    .active .type10:before {
+        box-shadow: 0 0 0 0 #fff;
+    }
+
+    .active .type10:after {
+        left: -10px;
+        box-shadow: 0 -10px 0 0 #fff;
+        transform: translateY(0) rotate(90deg);
+    }
+
+    .active .type11 {
+        transform: rotate(90deg);
+        transition: all 0.4s ease-in-out;
+    }
+
+    .active .type11:before {
+        transform: translateY(0) rotate(40deg);
+    }
+
+    .active .type11:after {
+        transform: translateY(0) rotate(-40deg);
+    }
+
+    .active .type12 {
+        transform: rotate(180deg);
+        transition: all 0.5s ease-in-out;
+    }
+
+    .active .type12:before {
+        transform: translateY(0) rotate(40deg);
+    }
+
+    .active .type12:after {
+        transform: translateY(0) rotate(-40deg);
+    }
+
+    .active .type13 {
+        transform: rotate(270deg);
+        transition: all 0.5s ease-in-out;
+    }
+
+    .active .type13:before {
+        transform: translateY(0) rotate(40deg);
+    }
+
+    .active .type13:after {
+        transform: translateY(0) rotate(-40deg);
+    }
+
+    .active .type14 {
+        background-color: #fff;
+        width: 12px;
+        margin: auto;
+    }
+
+    .active .type14:before {
+        width: 6px;
+    }
+
+    .active .type14:after {
+        width: 25px;
+    }
+
+    .active .type15 {
+        transform: rotate(360deg);
+        transition: all 0.5s ease-in-out;
+    }
+
+    .active .type15:before {
+        left: 6px;
+        transform: translateY(-8px) rotate(-138deg);
+    }
+
+    .active .type15:after {
+        left: 6px;
+        transform: translateY(6px) rotate(-226deg);
+    }
+
+    .active .type16 {
+        transform: rotate(360deg);
+        transition: all 0.6s ease-in-out;
+    }
+
+    .active .type16:before {
+        left: 6px;
+        transform: translateY(6px) rotate(-45deg);
+    }
+
+    .active .type16:after {
+        left: 6px;
+        transform: translateY(-8px) rotate(45deg);
+    }
+
+    .active .type17 {
+        transform: rotate(45deg);
+        background-color: #fff;
+        transition: all 0.6s ease-in-out;
+    }
+
+    .active .type17:before {
+        transform: translate(-4px, -6px) rotate(90deg);
+    }
+
+    .active .type17:after {
+        transform: translate(16px, -7px) rotate(90deg);
+    }
+
+    .active .type18 {
+        transform: rotate(-45deg);
+        background-color: #fff;
+        transition: all 0.6s ease-in-out;
+    }
+
+    .active .type18:before {
+        transform: translate(0, 0) rotate(90deg);
+    }
+
+    .active .type18:after {
+        transform: translate(0, 0) rotate(90deg);
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="row">
+
+                <div class="block">
+                    <div class="cta">
+                        <div class="toggle-btn type1"></div>
+                    </div>
+                </div>
+
+                <div class="block">
+                    <div class="cta">
+                        <div class="toggle-btn type2"></div>
+                    </div>
+                </div>
+
+                <div class="block">
+                    <div class="cta">
+                        <div class="toggle-btn type3"></div>
+                    </div>
+                </div>
+
+                <div class="block">
+                    <div class="cta">
+                        <div class="toggle-btn type4"></div>
+                    </div>
+                </div>
+
+                <div class="block">
+                    <div class="cta">
+                        <div class="toggle-btn type5"></div>
+                    </div>
+                </div>
+
+                <div class="block">
+                    <div class="cta">
+                        <div class="toggle-btn type6"></div>
+                    </div>
+                </div>
+
+                <div class="block">
+                    <div class="cta">
+                        <div class="toggle-btn type7"></div>
+                    </div>
+                </div>
+
+                <div class="block">
+                    <div class="cta">
+                        <div class="toggle-btn type8"></div>
+                    </div>
+                </div>
+
+                <div class="block">
+                    <div class="cta">
+                        <div class="toggle-btn type9"></div>
+                    </div>
+                </div>
+
+                <div class="block">
+                    <div class="cta">
+                        <div class="toggle-btn type10"></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="block">
+                    <div class="cta">
+                        <div class="toggle-btn type11"></div>
+                    </div>
+                </div>
+
+                <div class="block">
+                    <div class="cta">
+                        <div class="toggle-btn type12"></div>
+                    </div>
+                </div>
+
+                <div class="block">
+                    <div class="cta">
+                        <div class="toggle-btn type13"></div>
+                    </div>
+                </div>
+
+                <div class="block">
+                    <div class="cta">
+                        <div class="toggle-btn type14"></div>
+                    </div>
+                </div>
+
+                <div class="block">
+                    <div class="cta">
+                        <div class="toggle-btn type15"></div>
+                    </div>
+                </div>
+
+                <div class="block">
+                    <div class="cta">
+                        <div class="toggle-btn type16"></div>
+                    </div>
+                </div>
+
+                <div class="block">
+                    <div class="cta">
+                        <div class="toggle-btn type17"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(document).on('click', '.cta', function () {
+            $(this).toggleClass('active')
+        })
+    });
+</script>
+
+</html>
